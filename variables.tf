@@ -50,14 +50,14 @@ EOT
     name                                         = string
     resource_group_name                          = string
     sku_name                                     = string
-    public_network_access_enabled                = optional(bool, true)
-    project_management_enabled                   = optional(bool, false)
-    outbound_network_access_restricted           = optional(bool, false)
+    public_network_access_enabled                = optional(bool) # Default: true
+    project_management_enabled                   = optional(bool) # Default: false
+    outbound_network_access_restricted           = optional(bool) # Default: false
     metrics_advisor_website_name                 = optional(string)
     metrics_advisor_super_user_name              = optional(string)
     metrics_advisor_aad_tenant_id                = optional(string)
     fqdns                                        = optional(list(string))
-    local_auth_enabled                           = optional(bool, true)
+    local_auth_enabled                           = optional(bool) # Default: true
     qna_runtime_endpoint                         = optional(string)
     dynamic_throttling_enabled                   = optional(bool)
     custom_subdomain_name                        = optional(string)
@@ -78,7 +78,7 @@ EOT
       default_action = string
       ip_rules       = optional(set(string))
       virtual_network_rules = optional(object({
-        ignore_missing_vnet_service_endpoint = optional(bool, false)
+        ignore_missing_vnet_service_endpoint = optional(bool) # Default: false
         subnet_id                            = string
       }))
     }))
