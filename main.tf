@@ -1,3 +1,8 @@
+data "azurerm_key_vault_secret" "custom_question_answering_search_service_key" {
+  for_each     = { for k, v in var.cognitive_accounts : k => v if v.custom_question_answering_search_service_key_key_vault_id != null && v.custom_question_answering_search_service_key_key_vault_secret_name != null }
+  name         = each.value.custom_question_answering_search_service_key_key_vault_secret_name
+  key_vault_id = each.value.custom_question_answering_search_service_key_key_vault_id
+}
 resource "azurerm_cognitive_account" "cognitive_accounts" {
   for_each = var.cognitive_accounts
 
@@ -17,7 +22,7 @@ resource "azurerm_cognitive_account" "cognitive_accounts" {
   qna_runtime_endpoint                         = each.value.qna_runtime_endpoint
   dynamic_throttling_enabled                   = each.value.dynamic_throttling_enabled
   custom_subdomain_name                        = each.value.custom_subdomain_name
-  custom_question_answering_search_service_key = each.value.custom_question_answering_search_service_key
+  custom_question_answering_search_service_key = each.value.custom_question_answering_search_service_key != null ? each.value.custom_question_answering_search_service_key : try(data.azurerm_key_vault_secret.custom_question_answering_search_service_key[each.key].value, null)
   custom_question_answering_search_service_id  = each.value.custom_question_answering_search_service_id
   metrics_advisor_aad_client_id                = each.value.metrics_advisor_aad_client_id
   tags                                         = each.value.tags

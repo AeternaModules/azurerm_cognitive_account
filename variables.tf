@@ -10,6 +10,8 @@ Required:
 Optional:
     - custom_question_answering_search_service_id
     - custom_question_answering_search_service_key
+    - custom_question_answering_search_service_key_key_vault_id (alternative to custom_question_answering_search_service_key - read from Key Vault instead)
+    - custom_question_answering_search_service_key_key_vault_secret_name (alternative to custom_question_answering_search_service_key - read from Key Vault instead)
     - custom_subdomain_name
     - dynamic_throttling_enabled
     - fqdns
@@ -45,26 +47,28 @@ Optional:
 EOT
 
   type = map(object({
-    kind                                         = string
-    location                                     = string
-    name                                         = string
-    resource_group_name                          = string
-    sku_name                                     = string
-    public_network_access_enabled                = optional(bool) # Default: true
-    project_management_enabled                   = optional(bool) # Default: false
-    outbound_network_access_restricted           = optional(bool) # Default: false
-    metrics_advisor_website_name                 = optional(string)
-    metrics_advisor_super_user_name              = optional(string)
-    metrics_advisor_aad_tenant_id                = optional(string)
-    fqdns                                        = optional(list(string))
-    local_auth_enabled                           = optional(bool) # Default: true
-    qna_runtime_endpoint                         = optional(string)
-    dynamic_throttling_enabled                   = optional(bool)
-    custom_subdomain_name                        = optional(string)
-    custom_question_answering_search_service_key = optional(string)
-    custom_question_answering_search_service_id  = optional(string)
-    metrics_advisor_aad_client_id                = optional(string)
-    tags                                         = optional(map(string))
+    kind                                                               = string
+    location                                                           = string
+    name                                                               = string
+    resource_group_name                                                = string
+    sku_name                                                           = string
+    public_network_access_enabled                                      = optional(bool) # Default: true
+    project_management_enabled                                         = optional(bool) # Default: false
+    outbound_network_access_restricted                                 = optional(bool) # Default: false
+    metrics_advisor_website_name                                       = optional(string)
+    metrics_advisor_super_user_name                                    = optional(string)
+    metrics_advisor_aad_tenant_id                                      = optional(string)
+    fqdns                                                              = optional(list(string))
+    local_auth_enabled                                                 = optional(bool) # Default: true
+    qna_runtime_endpoint                                               = optional(string)
+    dynamic_throttling_enabled                                         = optional(bool)
+    custom_subdomain_name                                              = optional(string)
+    custom_question_answering_search_service_key                       = optional(string)
+    custom_question_answering_search_service_key_key_vault_id          = optional(string)
+    custom_question_answering_search_service_key_key_vault_secret_name = optional(string)
+    custom_question_answering_search_service_id                        = optional(string)
+    metrics_advisor_aad_client_id                                      = optional(string)
+    tags                                                               = optional(map(string))
     customer_managed_key = optional(object({
       identity_client_id = optional(string)
       key_vault_key_id   = string
