@@ -17,7 +17,7 @@ output "cognitive_accounts_custom_subdomain_name" {
 }
 output "cognitive_accounts_customer_managed_key" {
   description = "Map of customer_managed_key values across all cognitive_accounts, keyed the same as var.cognitive_accounts"
-  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => v.customer_managed_key if v.customer_managed_key != null && length(v.customer_managed_key) > 0 }
+  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => one(v.customer_managed_key) if v.customer_managed_key != null && length(v.customer_managed_key) > 0 }
 }
 output "cognitive_accounts_dynamic_throttling_enabled" {
   description = "Map of dynamic_throttling_enabled values across all cognitive_accounts, keyed the same as var.cognitive_accounts"
@@ -33,7 +33,7 @@ output "cognitive_accounts_fqdns" {
 }
 output "cognitive_accounts_identity" {
   description = "Map of identity values across all cognitive_accounts, keyed the same as var.cognitive_accounts"
-  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "cognitive_accounts_kind" {
   description = "Map of kind values across all cognitive_accounts, keyed the same as var.cognitive_accounts"
@@ -69,11 +69,11 @@ output "cognitive_accounts_name" {
 }
 output "cognitive_accounts_network_acls" {
   description = "Map of network_acls values across all cognitive_accounts, keyed the same as var.cognitive_accounts"
-  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => v.network_acls if v.network_acls != null && length(v.network_acls) > 0 }
+  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => one(v.network_acls) if v.network_acls != null && length(v.network_acls) > 0 }
 }
 output "cognitive_accounts_network_injection" {
   description = "Map of network_injection values across all cognitive_accounts, keyed the same as var.cognitive_accounts"
-  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => v.network_injection if v.network_injection != null && length(v.network_injection) > 0 }
+  value       = { for k, v in azurerm_cognitive_account.cognitive_accounts : k => one(v.network_injection) if v.network_injection != null && length(v.network_injection) > 0 }
 }
 output "cognitive_accounts_outbound_network_access_restricted" {
   description = "Map of outbound_network_access_restricted values across all cognitive_accounts, keyed the same as var.cognitive_accounts"
